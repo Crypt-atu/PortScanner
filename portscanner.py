@@ -186,13 +186,10 @@ def main():
     if args.start < 1 or args.end > 65535 or args.start > args.end:
         print("Error: Invalid port range (must be between 1 and 65535)")
         sys.exit(1)
-
-    if args.threads < 1 or args.threads > 500:
-        print("Error: Thread count must be between 1 and 500")
-        sys.exit(1)
+        
 
     show_banner(args.target)
-    threaded_scan(args.target, args.start, args.end, args.timeout, args.threads)
+    threaded_scan(args.target, args.start, args.end, args.timeout)
 
 if __name__ == "__main__":
     main()
