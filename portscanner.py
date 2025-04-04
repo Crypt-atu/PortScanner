@@ -180,16 +180,21 @@ def main():
     parser.add_argument("-s", "--start", type=int, default=1, help="Start port (default: 1)")
     parser.add_argument("-e", "--end", type=int, default=1024, help="End port (default: 1024)")
     parser.add_argument("-t", "--timeout", type=float, default=1.0, help="Timeout (default: 1.0 sec)")
+    parser.add_argument("-c", "--threads", type=float, default=100, help="Threads (default: 100)")
 
     args = parser.parse_args()
 
     if args.start < 1 or args.end > 65535 or args.start > args.end:
         print("Error: Invalid port range (must be between 1 and 65535)")
         sys.exit(1)
+
+    if args.threads < 1 or args.threads > 500:
+        print("Error: Thread count must be between 1 and 500")
+        sys.exit(1)
         
 
     show_banner(args.target)
-    threaded_scan(args.target, args.start, args.end, args.timeout)
+    threaded_scan(args.target, args.start, args.end, args.timeout, args.threads)
 
 if __name__ == "__main__":
     main()
