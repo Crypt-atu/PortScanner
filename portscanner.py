@@ -66,8 +66,7 @@ def port_scan(port, target_ip, timeout):
                             print(f"Port {port}: OPEN --> Service Running: ({service})")
                     with print_lock:
                         print(f"    └Banner: {banner_text}")
-
-                        open_ports.append(port)
+                    open_ports.append(port)
             except socket.timeout:
                 pass  # Ignore timeout errors for banner grabbing
             except Exception as e:
@@ -191,7 +190,6 @@ def main():
     if args.threads < 1 or args.threads > 500:
         print("Error: Thread count must be between 1 and 500")
         sys.exit(1)
-        
 
     show_banner(args.target)
     threaded_scan(args.target, args.start, args.end, args.timeout, args.threads)
