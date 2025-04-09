@@ -1,4 +1,4 @@
-#! /bin/bash
+#!/bin/bash
 #Printing Output Result to file Script
 #Author: Crypt
 
@@ -6,6 +6,9 @@
 to_upper(){
 	echo "${1^^}"
 }
+
+#Storing the dir of script
+SCRIPT_DIR="$(cd "$(dirname "$BASH_SOURCE[0]")" && pwd)"
 
 #Reading input
 echo "Only Use this Script if you want to print the output to a log file"
@@ -28,10 +31,11 @@ if [ "$option2" = "Y" ]; then
 	echo "Enter the specify timeout:"
 	read timeout
 
-	./portscanner.py $host -s $start -e $end -t $timeout > log.txt
+	python3 "$SCRIPT_DIR/portscanner.py" "$host" -s "$start" -e "$end" -t "$timeout" > log.log
+	echo "Scan results saved to log.txt"
 else
-	./portscanner.py $host > log.txt
-
+	python3 "$SCRIPT_DIR/portscanner.py" "$host" > log.log
+	echo "Scan results saved to log.txt"
 fi
 
-echo "Scan results saved to log.txt"
+
